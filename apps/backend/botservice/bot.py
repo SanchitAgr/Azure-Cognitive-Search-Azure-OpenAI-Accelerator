@@ -102,7 +102,7 @@ class MyBot(ActivityHandler):
         input_text_metadata["locale"] = turn_context.activity.locale if turn_context.activity.locale else "Not Available"
 
         # Setting the query to send to OpenAI
-        input_text = turn_context.activity.text + "\n\n metadata:\n" + str(input_text_metadata)    
+        input_text = turn_context.activity.text + "\n\n metadata:\n" + str(input_text_metadata) 
             
         # Set Callback Handler
         cb_handler = BotServiceCallbackHandler(turn_context)
@@ -177,7 +177,7 @@ class MyBot(ActivityHandler):
         config={"configurable": {"session_id": session_id, "user_id": user_id}}
 
         await turn_context.send_activity(Activity(type=ActivityTypes.typing))
-        
+         
         answer = brain_agent_executor.invoke({"question": input_text}, config=config)["output"]
         
         await turn_context.send_activity(answer)

@@ -62,7 +62,7 @@ st.markdown("""
 # ENTER HERE YOUR LANGSERVE FASTAPI ENDPOINT
 # for example: "https://webapp-backend-botid-zf4fwhz3gdn64-staging.azurewebsites.net"
 
-url = "https://<name-of-backend-app-service>-staging.azurewebsites.net" + "/agent/stream_events"
+url = "https://rtc-apac-webapp-fhctfxbncrbsc5fq.westeurope-01.azurewebsites.net" + "/api/messages"
 
 def get_or_create_ids():
     """Generate or retrieve session and user IDs."""
@@ -77,7 +77,7 @@ def consume_api(url, user_query, session_id, user_id):
     """Uses requests POST to talk to the FastAPI backend, supports streaming."""
     headers = {'Content-Type': 'application/json'}
     config = {"configurable": {"session_id": session_id, "user_id": user_id}}
-    payload = {'input': {"question": user_query}, 'config': config}
+    payload = {'input': {"question": user_query}, 'config': config, 'type': 'message'}
     
     with requests.post(url, json=payload, headers=headers, stream=True) as response:
         try:
